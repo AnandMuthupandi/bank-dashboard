@@ -1,15 +1,49 @@
-!["React sidebar with dropdown menu"](https://user-images.githubusercontent.com/67447840/200093301-c5560000-3d09-4f21-b94d-50d2071d09dd.png "React sidebar with dropdown menu")
+# Banking Dashboard
 
-# Video tutorial
+A web application for checking registered clients and their banking accounts. This project displays clients and their accounts as a scrollable page with various filtering options. The data is fetched from a RESTful API.
 
-    https://youtu.be/XwnZLgIfIvg
+![Screenshot](screenshot.png)
 
-# Reference
+## Features
 
-    - Create react app:https://create-react-app.dev/
-    - Material-UI: https://mui.com/
-    - React-router: https://reactrouter.com/
+- View a list of clients and their accounts.
+- Filter clients by their first name.
+- Filter accounts by account type (e.g., VISA).
+- Highlights accounts by balance (>= or < 0).
+- Interactive pie chart for balance filtering.
+- Click on graphs to view client account details in a popup.
 
-# Preview
+## Technologies Used
 
-!["React sidebar with dropdown menu"](https://user-images.githubusercontent.com/67447840/200093500-325d52c0-365e-4bef-9f63-3be736c917cb.gif "React sidebar with dropdown menu")
+- React
+- Fetch (for API requests)
+- D3 (for pie chart)
+- React Router (for routing)
+- CSS (for styling)
+
+## Installation
+
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.
+
+Installation:
+
+`npm install`
+
+To Run Test Suite:
+
+`npm test`
+
+To Start Server:
+
+`npm start`
+
+To Visit App:
+
+`localhost:3000/`
+
+## Usage
+
+- Use the text filter at the top to search for clients by their first name.
+- Click on the buttons near each vertical bar chart to filter accounts by account type.
+- Interact with the pie chart to filter accounts by balance (>= or < 0).
+- Click on a graph or 'More...' button to view client account details in a popup.
