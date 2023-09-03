@@ -2,7 +2,7 @@
 
 A web application for checking registered clients and their banking accounts. This project displays clients and their accounts as a scrollable page with various filtering options. The data is fetched from a RESTful API.
 
-![Screenshot](screenshot.png)
+<!-- ![Screenshot](screenshot.png) -->
 
 ## Features
 
