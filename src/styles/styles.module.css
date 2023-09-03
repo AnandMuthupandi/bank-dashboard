@@ -1,0 +1,53 @@
+.pageLoader {
+  margin: 80px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  padding: 0.75em;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0 0.25em 1em 0 rgba(0, 0, 0, 0.15);
+  animation: fade-in 0.25s ease;
+  font-size: 0.9em;
+}
+
+.formControlLabel {
+  font-size: 12px !important;
+}
+
+.tooltipTitle {
+  display: block;
+  /* margin-bottom: 0.5em; */
+  /* font-weight: bold; */
+}
+
+.container .slice {
+  transition-duration: 0.3s;
+  transition-property: filter, opacity;
+  filter: saturate(100%);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.container.hasHighlight .slice {
+  filter: saturate(50%);
+  opacity: 0.2;
+}
+
+.container.hasHighlight .slice:hover {
+  filter: saturate(100%);
+  opacity: 1;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center; /* Horizontally center content */
+  align-items: center; /* Vertically center content */
+}
