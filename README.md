@@ -15,7 +15,7 @@ A web application for checking registered clients and their banking accounts. Th
 
 ## Technologies Used
 
-- React
+- React, TypeScript
 - Fetch (for API requests)
 - D3 (for pie chart)
 - React Router (for routing)
