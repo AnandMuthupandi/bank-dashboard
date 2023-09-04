@@ -126,13 +126,13 @@ export default function BarChart({
   useEffect(() => {
     setClientAccountData(clientAccounts);
     setSuccess(true);
-  }, []);
+  }, [clientAccounts]);
 
-  const filteredCardTypes = (cardType: any) => {
-    const filteredItems = cardTypes.filter((card) => !cardType[card.id]);
+  // const filteredCardTypes = (cardType: any) => {
+  //   const filteredItems = cardTypes.filter((card) => !cardType[card.id]);
 
-    setClientAccountData(filteredItems);
-  };
+  //   setClientAccountData(filteredItems);
+  // };
   const highlightedAccounts =
     selectedSegment &&
     preprocessClientAccountData(clientAccountData).filter(({ balance }) =>
@@ -145,12 +145,15 @@ export default function BarChart({
 
   const maxYByCardType: Record<string, number> = preprocessClientAccountData(
     clientAccountData
-  ).reduce((acc, { card_type, balance }) => {
-    if (!acc[card_type] || balance > acc[card_type]) {
-      acc[card_type] = balance;
-    }
-    return acc;
-  }, {} as Record<string, number>);
+  ).reduce(
+    (acc, { card_type, balance }) => {
+      if (!acc[card_type] || balance > acc[card_type]) {
+        acc[card_type] = balance;
+      }
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   if (success) {
     const scaleX = scaleBand()
@@ -169,11 +172,6 @@ export default function BarChart({
 
     return (
       <>
-        <FilterCardType
-          clientAccounts={cardTypes}
-          filteredCards={filteredCardTypes}
-        />
-        {/* <br></br> */}
         <svg
           width={width + margin.left + margin.right}
           height={height + margin.top + margin.bottom}

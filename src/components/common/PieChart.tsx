@@ -28,7 +28,7 @@ const colors = [
   "#69b3a2",
 ];
 
-export const PieChart = ({
+const PieChart = ({
   width,
   height,
   clientAccounts,
@@ -184,3 +184,5 @@ export const PieChart = ({
     </>
   );
 };
+
+export default PieChart;

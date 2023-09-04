@@ -60,13 +60,14 @@ function SearchDropDown() {
   return (
     <>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Client First Name</InputLabel>
+        <InputLabel id="client-select-label">Client First Name</InputLabel>
         <Select
           sx={{
             width: 250,
             height: 50,
           }}
           label="Client First Name"
+          labelId="client-select-label"
           value={selectedClientName}
           onChange={handleChange}
           endAdornment={

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import BarChart from "./BarChart";
-import { PieChart } from "./PieChart";
+import PieChart from "./PieChart";
 import { CONSTANTS } from "../../utils/constants";
 import { useApiContext } from "../../contexts/apicontext";
 import { APIUtility } from "../../utils/apiutilities";
 import { IClientAccounts } from "../../interfaces/types";
 import EmptyAccounts from "./EmptyAccounts";
 import LoadingWrapper from "./loading/LoadingWrapper";
+import FilterCardType from "./FilterCardType";
 
 interface ChartProps {
   clientId: string;
@@ -60,7 +61,13 @@ export default function Charts({ clientId, openModal }: ChartProps) {
     openModal();
   };
 
-  if (clientAccounts.length) {
+  const filteredCardTypes = (cardType: any) => {
+    const filteredItems = cardTypes.filter((card) => !cardType[card.id]);
+
+    setClientAccounts(filteredItems);
+  };
+
+  if (cardTypes.length) {
     return (
       <>
         <LoadingWrapper
@@ -68,15 +75,23 @@ export default function Charts({ clientId, openModal }: ChartProps) {
           component={
             <>
               <Grid item xs={4}>
-                <PieChart
-                  width={400}
-                  height={200}
-                  clientAccounts={clientAccounts}
-                  cardTypes={cardTypes}
-                  onSegmentClick={handlePieSegmentClick}
-                />
+                {clientAccounts.length ? (
+                  <PieChart
+                    width={400}
+                    height={200}
+                    clientAccounts={clientAccounts}
+                    cardTypes={cardTypes}
+                    onSegmentClick={handlePieSegmentClick}
+                  />
+                ) : (
+                  <></>
+                )}
               </Grid>
               <Grid item xs={4}>
+                <FilterCardType
+                  clientAccounts={cardTypes}
+                  filteredCards={filteredCardTypes}
+                />
                 <div onClick={handleModal}>
                   <BarChart
                     clientAccounts={clientAccounts}

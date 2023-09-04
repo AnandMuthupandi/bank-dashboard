@@ -1,7 +1,6 @@
 import React from "react";
 import { CONSTANTS } from "../utils/constants";
 import { APIUtility } from "../utils/apiutilities";
-import { useLoaderCtxt } from "./loadercontext";
 
 const ApiContext = React.createContext();
 
@@ -73,7 +72,7 @@ const parseResponse = async (res) => {
   return Promise.reject(res);
 };
 
-const callFetch = (apiDispatch, showLoader) => {
+const callFetch = (apiDispatch) => {
   return ({
     url = "",
     apiId = "",
@@ -82,7 +81,6 @@ const callFetch = (apiDispatch, showLoader) => {
     successCallback = () => {},
     errorCallback = () => {},
   }) => {
-    showLoader(true);
     APIUtility.validateApiDetails(
       {
         url,
@@ -113,7 +111,6 @@ const callFetch = (apiDispatch, showLoader) => {
         }
         successCallback(data);
       }
-      showLoader(false);
     };
 
     const handleError = (error) => {
@@ -126,7 +123,6 @@ const callFetch = (apiDispatch, showLoader) => {
       } else {
         errorCallback(error);
       }
-      showLoader(false);
     };
 
     const handleException = (err) => {
@@ -144,7 +140,6 @@ const callFetch = (apiDispatch, showLoader) => {
             "System is unavailable to respond now. Please try again later.",
         });
       }
-      showLoader(false);
     };
 
     fetch(url, options)
@@ -164,8 +159,7 @@ function useApiContext() {
 
 function ApiProvider(props) {
   const [apiState, apiDispatch] = React.useReducer(apiReducer, initialApiState);
-  const { showLoader } = useLoaderCtxt();
-  const fetchData = callFetch(apiDispatch, showLoader);
+  const fetchData = callFetch(apiDispatch);
   const value = { apiState, fetchData, apiDispatch };
   return <ApiContext.Provider value={value} {...props} />;
 }
