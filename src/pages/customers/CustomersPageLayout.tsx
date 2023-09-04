@@ -1,12 +1,5 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+function CustomersPageLayout() {
+  return <div>Customers page is under construction</div>;
+}
 
-type Props = {};
-
-const ComponentPageLayout = (props: Props) => {
-  return (
-    <><Outlet /></>
-  );
-};
-
-export default ComponentPageLayout;
+export default CustomersPageLayout;

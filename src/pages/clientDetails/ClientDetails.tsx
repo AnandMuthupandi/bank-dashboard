@@ -10,8 +10,8 @@ import Typography from "@mui/material/Typography";
 import { useApiContext } from "../../contexts/apicontext";
 import { clientDetailsMapping } from "./ClientDetailsMapping";
 import Charts from "../../components/common/Charts";
-import IClientDetails from "../../interfaces/IClientDetails";
 import AccountsTable from "../accountsTable/AccountsTable";
+import { IClientDetails } from "../../interfaces/types";
 
 const style = {
   position: "absolute" as "absolute",

@@ -3,7 +3,7 @@ import { RouteType } from "./config";
 import CustomersPageLayout from "../pages/customers/CustomersPageLayout";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-// import Dashboard from "../pages/dashboard/Dashboard";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 const appRoutes: RouteType[] = [
   {
@@ -12,15 +12,15 @@ const appRoutes: RouteType[] = [
     element: <HomePage />,
     state: "home",
   },
-  // {
-  //   path: "/dashboard",
-  //   element: <Dashboard />,
-  //   state: "dashboard",
-  //   sidebarProps: {
-  //     displayText: "Dashboard",
-  //     icon: <DashboardOutlinedIcon />,
-  //   },
-  // },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    state: "dashboard",
+    sidebarProps: {
+      displayText: "Dashboard",
+      icon: <DashboardOutlinedIcon />,
+    },
+  },
   {
     path: "/customers",
     element: <CustomersPageLayout />,

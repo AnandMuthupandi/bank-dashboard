@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import BarChart from "./BarChart";
+import BarChart from "../barChart/BarChart";
 import PieChart from "./PieChart";
 import { CONSTANTS } from "../../utils/constants";
 import { useApiContext } from "../../contexts/apicontext";

@@ -1,4 +1,4 @@
-import IClientDetails from "../../interfaces/IClientDetails";
+import { IClientDetails } from "../../interfaces/types";
 
 export const clientDetailsMapping = (client: IClientDetails) => {
   return [

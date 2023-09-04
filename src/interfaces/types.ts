@@ -1,3 +1,6 @@
+import { ScaleBand, ScaleLinear } from "d3";
+import { MouseEvent } from "react";
+
 export interface IData {
   id: string;
   card_type: string;
@@ -15,4 +18,50 @@ export interface IClientAccounts {
   created: string;
   id: string;
   number: number;
+}
+
+export interface IClientDetails {
+  id: string;
+  firstname: string;
+  name: string;
+  birthday: string;
+  address: string;
+  created: string;
+  accounts: [];
+}
+
+export interface BarChartProps {
+  clientAccounts: IClientAccounts[];
+  cardTypes: IClientAccounts[];
+  selectedSegment: any;
+}
+export interface ITooltip {
+  x: number;
+  y: number;
+  balance: number;
+  cardType: string;
+}
+
+export interface AxisBottomProps {
+  scale: ScaleBand<string>;
+  transform: string;
+}
+
+export interface AxisLeftProps {
+  scaleLeft: ScaleLinear<number, number, never>;
+}
+
+export interface BarsProps {
+  data: IData[];
+  height: number;
+  scaleX: AxisBottomProps["scale"];
+  scaleY: AxisLeftProps["scaleLeft"];
+  onMouseEnter: (
+    e: MouseEvent<SVGPathElement>,
+    balance: number,
+    cardType: string
+  ) => void;
+  onMouseLeave: () => void;
+  selectedSegment: any;
+  highlightedAccounts: any;
 }

@@ -6,8 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import IClientDetails from "../../interfaces/IClientDetails";
-import { IClientAccounts } from "../../interfaces/types";
+import { IClientAccounts, IClientDetails } from "../../interfaces/types";
 import { useApiContext } from "../../contexts/apicontext";
 import EmptyAccounts from "../../components/common/EmptyAccounts";
 
