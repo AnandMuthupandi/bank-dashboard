@@ -128,11 +128,6 @@ export default function BarChart({
     setSuccess(true);
   }, [clientAccounts]);
 
-  // const filteredCardTypes = (cardType: any) => {
-  //   const filteredItems = cardTypes.filter((card) => !cardType[card.id]);
-
-  //   setClientAccountData(filteredItems);
-  // };
   const highlightedAccounts =
     selectedSegment &&
     preprocessClientAccountData(clientAccountData).filter(({ balance }) =>

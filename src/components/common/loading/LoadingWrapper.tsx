@@ -4,7 +4,6 @@ import PageLoader from "./PageLoader";
 interface LoadingWrapperProps {
   isShowLoading: boolean;
   component: React.ReactNode;
-  //   componentName: string; // Define componentName as a prop
 }
 
 function LoadingWrapper(props: LoadingWrapperProps): JSX.Element {

@@ -45,7 +45,6 @@ function SearchDropDown() {
         id: "",
       },
     });
-    // onSelect("");
   };
 
   const getClientId = (selectedName: string) => {

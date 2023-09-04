@@ -1,4 +1,3 @@
-// src/components/ClientList.tsx
 import React, { useEffect } from "react";
 import { useApiContext } from "../../contexts/apicontext";
 import { APIUtility } from "../../utils/apiutilities";

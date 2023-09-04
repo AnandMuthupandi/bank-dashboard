@@ -60,7 +60,6 @@ export default function FilterCardType({ clientAccounts, filteredCards }: any) {
                         onChange={() => handleCheckboxChange(account.id)}
                       />
                     }
-                    // label={account.card_type}
                     label={
                       <Typography className={styles.formControlLabel}>
                         {account.card_type}

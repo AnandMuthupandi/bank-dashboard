@@ -1,24 +1,24 @@
-// Import necessary dependencies and the component to be tested
-import React from "react";
-import { render } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import App from "../App"; // Adjust the import path as needed
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import App from '../App';
 
-// Describe the test suite
-describe("App Component", () => {
-  it("renders without crashing", () => {
-    // Render the component within a MemoryRouter (or BrowserRouter for production)
-    const { getByText } = render(
-      <MemoryRouter initialEntries={["/"]}>
-        <App />
-      </MemoryRouter>
-    );
+// Mock the Empty Accounts component
+jest.mock("../../src/components/layout/MainLayout", () => () => (
+  <div data-testid="mock-main-layout">Mocked Main Layout</div>
+));
+test('renders the main layout', () => {
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
 
-    // Add assertions to verify that specific content is rendered
-    // For example, if you have a component with a specific text, you can do:
-    
+  // Use queries to find elements in the rendered component
+  const mainLayoutElement = screen.getByTestId('mock-main-layout');
 
-    // Example: expect the MainLayout component to be rendered
-    expect(getByText("MainLayout")).toBeInTheDocument();
-  });
+  // Assert that the main layout element is in the document
+  expect(mainLayoutElement).toBeInTheDocument();
 });
+
+// Add more tests as needed...

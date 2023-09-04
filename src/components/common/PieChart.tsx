@@ -47,28 +47,9 @@ const PieChart = ({
 
   useEffect(() => {
     if (!isChartClicked) {
-      // Your condition here
       onSegmentClick(null);
     }
   }, [isChartClicked]);
-
-  const handleChartClick = () => {
-    setIsChartClicked(!isChartClicked);
-  };
-
-  // const handleContainerClick = (e: any) => {
-  //   if (!e.target.closest("svg")) {
-  //     console.log("handleContainerClick");
-
-  //     setIsChartClicked(false);
-  //     // Reset highlightedAccounts
-  //     const resetHighlightedAccounts = [];
-  //     onSegmentClick(null);
-  //   }
-
-  //   // Pass the resetHighlightedAccounts to the Bars component
-  //   // and use it to adjust the opacity of bars
-  // };
 
   const pie = useMemo(() => {
     let pieData = [];

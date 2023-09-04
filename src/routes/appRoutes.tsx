@@ -22,7 +22,7 @@ const appRoutes: RouteType[] = [
   //   },
   // },
   {
-    path: "/component",
+    path: "/customers",
     element: <CustomersPageLayout />,
     state: "component",
     sidebarProps: {
@@ -30,24 +30,6 @@ const appRoutes: RouteType[] = [
       icon: <PersonOutlineOutlinedIcon />,
     },
   },
-  // {
-  //   path: "/documentation",
-  //   element: <DocumentationPage />,
-  //   state: "documentation",
-  //   sidebarProps: {
-  //     displayText: "Documentation",
-  //     icon: <ArticleOutlinedIcon />,
-  //   },
-  // },
-  // {
-  //   path: "/changelog",
-  //   element: <ChangelogPage />,
-  //   state: "changelog",
-  //   sidebarProps: {
-  //     displayText: "Changelog",
-  //     icon: <FormatListBulletedOutlinedIcon />,
-  //   },
-  // },
 ];
 
 export default appRoutes;
