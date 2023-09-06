@@ -8,7 +8,7 @@ import { APIUtility } from "../../utils/apiutilities";
 import { ChartProps, IClientAccounts } from "../../interfaces/types";
 import EmptyAccounts from "./EmptyAccounts";
 import LoadingWrapper from "./loading/LoadingWrapper";
-import FilterCardType from "./FilterCardType";
+import FilterCardType from "../filterCardType/FilterCardType";
 import { preprocessClientAccountResponse } from "../../utils/chartUtilities";
 
 export default function Charts({ clientId, openModal }: ChartProps) {
@@ -73,8 +73,6 @@ export default function Charts({ clientId, openModal }: ChartProps) {
               <Grid item xs={4}>
                 {clientAccounts.length ? (
                   <PieChart
-                    width={400}
-                    height={200}
                     clientAccounts={clientAccounts}
                     onSegmentClick={handlePieSegmentClick}
                   />

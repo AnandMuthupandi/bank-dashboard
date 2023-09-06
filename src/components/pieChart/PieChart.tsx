@@ -2,35 +2,11 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 import styles from "../../styles/styles.module.css";
 import { PieChartProps, IPieDataItem } from "../../interfaces/types";
+import { chartColors, margins } from "../../utils/chartUtilities";
 
-const MARGIN_X = 150;
-const MARGIN_Y = 50;
-const INFLEXION_PADDING = 20;
-
-const colors = [
-  "#e0ac2b",
-  "#e85252",
-  "#6689c6",
-  "#9a6fb0",
-  "#a53253",
-  "#69b3a2",
-];
-
-const PieChart = ({
-  width,
-  height,
-  clientAccounts,
-  onSegmentClick,
-}: PieChartProps) => {
+const PieChart = ({ clientAccounts, onSegmentClick }: PieChartProps) => {
   const ref = useRef(null);
   const [isChartClicked, setIsChartClicked] = useState(false);
-
-  // Calculate the counts of positive and negative balances
-  const positiveCount = clientAccounts.filter(
-    ({ balance }) => balance >= 0
-  ).length;
-  const negativeCount = clientAccounts.length - positiveCount;
-  const radius = Math.min(width - 2 * MARGIN_X, height - 2 * MARGIN_Y) / 2;
 
   useEffect(() => {
     if (!isChartClicked) {
@@ -38,20 +14,28 @@ const PieChart = ({
     }
   }, [isChartClicked]);
 
+  // Calculate the counts of positive and negative balances
+  const positiveCount = clientAccounts.filter(
+    ({ balance }) => balance >= 0
+  ).length;
+  const negativeCount = clientAccounts.length - positiveCount;
+  const radius =
+    Math.min(
+      margins.width - 2 * margins.MARGIN_X,
+      margins.height - 2 * margins.MARGIN_Y
+    ) / 2;
+
   const pie = useMemo(() => {
     let pieData = [];
-
     if (positiveCount > 0) {
       pieData.push({ label: "Balance >=0", value: positiveCount });
     }
-
     if (negativeCount > 0) {
       pieData.push({ label: "Balance <0", value: negativeCount });
     }
     const pieGenerator = d3.pie<any, IPieDataItem>().value((d) => d.value);
     return pieGenerator(pieData);
   }, []);
-
   const arcGenerator = d3.arc();
 
   const shapes = pie.map((grp, i) => {
@@ -67,13 +51,12 @@ const PieChart = ({
 
     // Second arc is for the legend inflexion point
     const inflexionInfo = {
-      innerRadius: radius + INFLEXION_PADDING,
-      outerRadius: radius + INFLEXION_PADDING,
+      innerRadius: radius + margins.INFLEXION_PADDING,
+      outerRadius: radius + margins.INFLEXION_PADDING,
       startAngle: grp.startAngle,
       endAngle: grp.endAngle,
     };
     const inflexionPoint = arcGenerator.centroid(inflexionInfo);
-
     const isRightLabel = inflexionPoint[0] > 0;
     const labelPosX = inflexionPoint[0] + 20 * (isRightLabel ? 1 : -1);
     const textAnchor = isRightLabel ? "start" : "end";
@@ -96,7 +79,7 @@ const PieChart = ({
       >
         <path
           d={slicePath as string | undefined}
-          fill={colors[i]}
+          fill={chartColors[i]}
           onClick={() => onSegmentClick(grp.data.label)}
         />
         <circle cx={centroid[0]} cy={centroid[1]} r={2} />
@@ -134,13 +117,16 @@ const PieChart = ({
       {clientAccounts.length && (
         <div>
           <svg
-            width={width}
-            height={height}
+            data-testid="pieChart"
+            width={margins.width}
+            height={margins.height}
             style={{ display: "inline-block" }}
             onClick={() => setIsChartClicked(!isChartClicked)}
           >
             <g
-              transform={`translate(${width / 2}, ${height / 2})`}
+              transform={`translate(${margins.width / 2}, ${
+                margins.height / 2
+              })`}
               className={styles.container}
               ref={ref}
             >

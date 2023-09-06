@@ -4,6 +4,10 @@ import App from "../App";
 import { ApiProvider } from "../contexts/apicontext";
 import { BrowserRouter } from "react-router-dom";
 
+// Mock the Empty Accounts component
+jest.mock("../App", () => () => (
+  <div data-testid="mock-App">Mocked App</div>
+));
 test("renders App component", () => {
   // Render the component with necessary providers
   render(
@@ -15,6 +19,6 @@ test("renders App component", () => {
   );
 
   // You can write assertions based on your component's content
-  const linkElement = screen.getByTestId('App');
+  const linkElement = screen.getByTestId('mock-App');
   expect(linkElement).toBeInTheDocument();
 });

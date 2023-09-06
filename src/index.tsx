@@ -13,7 +13,7 @@ root.render(
     <ApiProvider>
       <CssBaseline />
       <BrowserRouter>
-        <App data-testid="App" />
+        <App />
       </BrowserRouter>
     </ApiProvider>
   </React.StrictMode>

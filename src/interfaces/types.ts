@@ -72,8 +72,6 @@ export interface ChartProps {
 }
 
 export interface PieChartProps {
-  width: number;
-  height: number;
   clientAccounts: IClientAccounts[];
   onSegmentClick: (segmentData: any) => void;
 }

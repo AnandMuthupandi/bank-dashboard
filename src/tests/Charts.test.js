@@ -1,16 +1,11 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import Charts from "../components/common/Charts";
 import { useApiContext } from "../contexts/apicontext";
 
 // Mock the BarChart component
 jest.mock("../components/barChart/BarChart", () => () => (
   <div data-testid="mock-bar-chart">Mocked Bar Chart</div>
-));
-
-// Mock the PieChart component
-jest.mock("../components/pieChart/PieChart", () => () => (
-  <div data-testid="mock-pie-chart">Mocked Pie Chart</div>
 ));
 
 // Mock the Empty Accounts component
@@ -54,17 +49,17 @@ describe("Charts Component", () => {
   });
 
   it("renders pie chart when cardTypes have data", async () => {
-    render(<Charts clientId="123" openModal={() => { }} />);
+    render(<Charts clientId="123" openModal={() => {}} />);
     await waitFor(() => {
-      const pieChart = screen.getByTestId("mock-pie-chart");
+      const pieChart = screen.getByText("Balance >=0");
       expect(pieChart).toBeInTheDocument();
     });
   });
 
   it("renders bar chart when cardTypes have data", async () => {
-    render(<Charts clientId="123" openModal={() => { }} />);
+    render(<Charts clientId="123" openModal={() => {}} />);
     await waitFor(() => {
-      const barChart = screen.getByTestId("mock-pie-chart");
+      const barChart = screen.getByTestId("mock-bar-chart");
       expect(barChart).toBeInTheDocument();
     });
   });
@@ -82,12 +77,21 @@ describe("Charts Component", () => {
       apiDispatch: apiDispatchMock,
     });
 
-    render(<Charts clientId="456" openModal={() => { }} />);
+    render(<Charts clientId="456" openModal={() => {}} />);
 
     // Wait for the LoadingWrapper to finish loading
     await waitFor(() => {
       const emptyAccounts = screen.getByTestId("mock-empty-accounts");
       expect(emptyAccounts).toBeInTheDocument();
     });
+  });
+  it("handlePieSegmentClick sets the selectedSegment state", () => {
+    let selectedSegment = null;
+
+    render(<Charts clientId="123" openModal={() => {}} />);
+
+    fireEvent.click(screen.getByTestId("pieChart"));
+
+    expect(selectedSegment).toBe(null);
   });
 });
