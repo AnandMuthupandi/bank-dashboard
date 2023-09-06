@@ -9,7 +9,10 @@ import { ChartProps, IClientAccounts } from "../../interfaces/types";
 import EmptyAccounts from "./EmptyAccounts";
 import LoadingWrapper from "./loading/LoadingWrapper";
 import FilterCardType from "../filterCardType/FilterCardType";
-import { preprocessClientAccountResponse } from "../../utils/chartUtilities";
+import {
+  preprocessAccountsData,
+  preprocessClientAccountsData,
+} from "../../utils/chartUtilities";
 
 export default function Charts({ clientId, openModal }: ChartProps) {
   const { apiState, fetchData, apiDispatch } = useApiContext();
@@ -17,6 +20,7 @@ export default function Charts({ clientId, openModal }: ChartProps) {
   const [cardTypes, setCardTypes] = useState<IClientAccounts[]>([]);
   const [selectedSegment, setSelectedSegment] = useState(null);
   const [isShowLoading, setIsShowLoading] = useState(false);
+  const accountsId = CONSTANTS.API.ACCOUNTS.ID;
   const clientAccountsAPIId = CONSTANTS.API.CLIENT_ACCOUNTS.ID;
 
   useEffect(() => {
@@ -29,7 +33,12 @@ export default function Charts({ clientId, openModal }: ChartProps) {
         apiId: clientAccountsAPIId,
         options: APIUtility.apiGetOptions,
         successCallback: async (resp: IClientAccounts[]) => {
-          const accountDetails = await preprocessClientAccountResponse(resp);
+          let accounts: IClientAccounts[] = [];
+          if (apiState[accountsId] && apiState[accountsId].data) {
+            accounts = preprocessAccountsData(apiState[accountsId].data);
+          }
+          const accountDetails: IClientAccounts[] =
+            await preprocessClientAccountsData(resp, accounts);
           setClientAccounts(accountDetails);
           setCardTypes(accountDetails);
           setIsShowLoading(false);
@@ -39,10 +48,6 @@ export default function Charts({ clientId, openModal }: ChartProps) {
             resp,
           });
         },
-        errorCallback: (error: any) => {
-          setClientAccounts(error);
-        },
-        isToStoreInContext: false,
       });
     } else if (apiState.apiState?.clientAccounts[clientId]) {
       setClientAccounts(apiState.apiState.clientAccounts[clientId]);

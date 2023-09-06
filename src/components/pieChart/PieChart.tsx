@@ -12,7 +12,7 @@ const PieChart = ({ clientAccounts, onSegmentClick }: PieChartProps) => {
     if (!isChartClicked) {
       onSegmentClick(null);
     }
-  }, [isChartClicked]);
+  }, [isChartClicked, onSegmentClick]);
 
   // Calculate the counts of positive and negative balances
   const positiveCount = clientAccounts.filter(
@@ -35,7 +35,7 @@ const PieChart = ({ clientAccounts, onSegmentClick }: PieChartProps) => {
     }
     const pieGenerator = d3.pie<any, IPieDataItem>().value((d) => d.value);
     return pieGenerator(pieData);
-  }, []);
+  }, [positiveCount, negativeCount]);
   const arcGenerator = d3.arc();
 
   const shapes = pie.map((grp, i) => {

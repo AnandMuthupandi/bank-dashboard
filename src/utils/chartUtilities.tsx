@@ -17,14 +17,63 @@ export const margins = {
   height: 200,
 };
 
-export function preprocessClientAccountResponse(
+// export function preprocessClientAccountsData(
+//   data: IClientAccounts[],
+//   accounts: IClientAccounts[]
+// ): IClientAccounts[] {
+//   const cardTypeCounts: Record<string, number> = {};
+//   return data.map((item) => {
+//     if (item.id === "608577dc5bcabe685f68eb16" && item.card_type === "VISA") {
+//       return { ...item, card_type: `extra-${item.card_type}` };
+//     } else {
+//       return item;
+//     }
+//   });
+// }
+
+// export function preprocessClientAccountsData(
+//   clientData: IClientAccounts[],
+//   accounts: IClientAccounts[]
+// ): IClientAccounts[] {
+//   return accounts.map((accountItem) => {
+//     const matchedItem = clientData.find((item1) => item1.id === accountItem.id);
+//     if (matchedItem) {
+//       return { ...clientData, card_type: matchedItem.card_type };
+//     } else {
+//       return clientData;
+//     }
+
+//   });
+// }
+
+export function preprocessClientAccountsData(
+  clientData: IClientAccounts[],
+  accounts: IClientAccounts[]
+): IClientAccounts[] {
+  return clientData.map((clientItem) => {
+    const matchedAccount = accounts.find(
+      (accountItem) => accountItem.id === clientItem.id
+    );
+    if (matchedAccount) {
+      return { ...clientItem, card_type: matchedAccount.card_type };
+    } else {
+      return clientItem;
+    }
+  });
+}
+
+export function preprocessAccountsData(
   data: IClientAccounts[]
 ): IClientAccounts[] {
+  const cardTypeCounts: Record<string, number> = {};
+  data.sort((a, b) => a.number - b.number);
   return data.map((item) => {
-    if (item.id === "608577dc5bcabe685f68eb16" && item.card_type === "VISA") {
-      return { ...item, card_type: `extra-${item.card_type}` };
+    const { card_type } = item;
+    if (!cardTypeCounts[card_type]) {
+      cardTypeCounts[card_type] = 1;
+      return { ...item };
     } else {
-      return item;
+      return { ...item, card_type: `extra-${item.card_type}` };
     }
   });
 }

@@ -20,7 +20,6 @@ export default function FilterCardType({ clientAccounts, filteredCards }: any) {
     }));
   };
 
-  // Call the function whenever checkedItems change
   useEffect(() => {
     filteredCards(checkedItems);
   }, [checkedItems]);

@@ -7,7 +7,7 @@ import ClientDetails from "../clientDetails/ClientDetails";
 const Home: React.FC = () => {
   const { apiState, fetchData } = useApiContext();
   const clientsAPIId = CONSTANTS.API.CLIENTS.ID;
-
+  const accountsId = CONSTANTS.API.ACCOUNTS.ID;
   useEffect(() => {
     if (!apiState[clientsAPIId]) {
       fetchData({
@@ -15,6 +15,12 @@ const Home: React.FC = () => {
         apiId: clientsAPIId,
         options: APIUtility.apiGetOptions,
 
+        isToStoreInContext: true,
+      });
+      fetchData({
+        url: APIUtility.generateApiUrl(CONSTANTS.API.ACCOUNTS.URL),
+        apiId: accountsId,
+        options: APIUtility.apiGetOptions,
         isToStoreInContext: true,
       });
     }

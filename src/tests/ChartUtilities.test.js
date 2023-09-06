@@ -1,4 +1,4 @@
-import { preprocessClientAccountResponse } from '../utils/chartUtilities'
+import { preprocessClientAccountsData } from '../utils/chartUtilities'
 
 const clientAccounts = [{
     id: "6084118399e57e9b1e12ac45",
@@ -14,7 +14,7 @@ describe("Chart Utilities", () => {
       { id: "2", card_type: "MasterCard" },
     ];
 
-    const outputData = preprocessClientAccountResponse(clientAccounts);
+    const outputData = preprocessClientAccountsData(clientAccounts);
 
     // Ensure that the output is the same as the input when conditions are not met
     expect(outputData).toEqual(inputData);
@@ -26,7 +26,7 @@ describe("Chart Utilities", () => {
       { id: "2", card_type: "MasterCard" },
     ];
 
-    const outputData = preprocessClientAccountResponse(inputData);
+    const outputData = preprocessClientAccountsData(inputData);
 
     // Ensure that the output data is modified as expected
     expect(outputData[0].card_type).toBe("extra-VISA");
