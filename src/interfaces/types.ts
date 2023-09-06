@@ -65,3 +65,8 @@ export interface BarsProps {
   selectedSegment: any;
   highlightedAccounts: any;
 }
+
+export interface ChartProps {
+  clientId: string;
+  openModal: () => void;
+}

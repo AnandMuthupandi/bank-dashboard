@@ -24,10 +24,9 @@ function SearchDropDown() {
   }
 
   const handleChange = (e: any) => {
-    const selectedValue = e.target.value; // Selected client name
-    const selectedClientId = getClientId(selectedValue); // Get the corresponding client ID based on the selected name
+    const selectedValue = e.target.value;
+    const selectedClientId = getClientId(selectedValue);
     setSelectedClientName(selectedValue);
-
     apiDispatch({
       type: CONSTANTS.ACTIONS.SELECTED_CLIENT_NAME,
       data: {
@@ -53,8 +52,6 @@ function SearchDropDown() {
     );
     return selectedClient ? selectedClient.id : null;
   };
-
-  console.log("apiState", apiState);
 
   return (
     <>

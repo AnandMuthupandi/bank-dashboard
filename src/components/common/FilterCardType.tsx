@@ -13,7 +13,6 @@ const theme = createTheme({});
 
 export default function FilterCardType({ clientAccounts, filteredCards }: any) {
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
-  console.log("accounts", clientAccounts);
 
   const handleCheckboxChange = (accountId: string) => {
     setCheckedItems((prevCheckedItems) => ({
@@ -27,7 +26,6 @@ export default function FilterCardType({ clientAccounts, filteredCards }: any) {
     filteredCards(checkedItems);
   }, [checkedItems]);
 
-  console.log("Checked Items", checkedItems);
   return (
     <>
       {clientAccounts.length && (

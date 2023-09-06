@@ -76,7 +76,7 @@ const callFetch = (apiDispatch) => {
   return ({
     url = "",
     apiId = "",
-    options = APIUtility.apiPostOptions(),
+    options = APIUtility.apiGetOptions(),
     isToStoreInContext = false,
     successCallback = () => {},
     errorCallback = () => {},

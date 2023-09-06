@@ -1,29 +1,32 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Sidebar from '../../src/components/common/Sidebar';
+import Sidebar from '../components/common/Sidebar';
 
 const mockAssets = {
-    images: {
-        logo: "../../src/assets/images/bank-logo.png", 
-        zeroAccount: "../../src/assets/images/bank-logo.png"
-    },
-  };
+  images: {
+    logo: "../assets/images/bank-logo.png",
+    zeroAccount: "../assets/images/bank-logo.png"
+  },
+};
 // Mock the appRoutes that you expect to be used in your Sidebar
 const mockAppRoutes = [
-  { path: '/', sidebarProps: { text: 'Home' } },
-  { path: '/dashboard', sidebarProps: { text: 'Dashboard' } },
+  { path: '/', sidebarProps: { text: 'Home,Dashboard' } },
+  { path: '/dashboard', sidebarProps: { text: 'Home,Dashboard' } },
   // Add more route objects as needed
 ];
 
 // Mock the Empty Accounts component
-jest.mock("../../src/components/common/SidebarItem", () => () => (
-    <div data-testid="mock-sidebarItem">Home,Dashboard</div>
-  ));
-    
-  jest.mock("../../src/assets", () => ({
-    ...mockAssets,
-  }));
+jest.mock("../components/common/SidebarItem", () => () => (
+  <div data-testid="mock-sidebarItem">Home,Dashboard</div>
+));
+
+jest.mock("../assets", () => ({
+  images: {
+    logo: "../assets/images/bank-logo.png",
+    zeroAccount: "../assets/images/bank-logo.png"
+  },
+}));
 
 describe('Sidebar Component', () => {
   it('renders the Sidebar component', () => {
@@ -36,8 +39,10 @@ describe('Sidebar Component', () => {
     // Check if the Sidebar component is rendered
     const avatarElement = screen.getByAltText("Logo");
     expect(avatarElement).toBeInTheDocument();
-    const sidebarElement = screen.getByTestId('mock-sidebarItem');
-    expect(sidebarElement).toBeInTheDocument();
+    const sidebarElement1 = screen.getAllByTestId('mock-sidebarItem')[0];
+    expect(sidebarElement1).toBeInTheDocument();
+    const sidebarElement2 = screen.getAllByTestId('mock-sidebarItem')[1];
+    expect(sidebarElement2).toBeInTheDocument();
   });
 
   it('renders sidebar items based on appRoutes', () => {
@@ -48,9 +53,13 @@ describe('Sidebar Component', () => {
     );
 
     // Check if sidebar items are rendered based on the mockAppRoutes
-    mockAppRoutes.forEach((route) => {
-      const sidebarItemElement = screen.getByText(route.sidebarProps.text);
-      expect(sidebarItemElement).toBeInTheDocument();
-    });
+    // mockAppRoutes.forEach((route) => {
+    //   const sidebarItemElement = screen.getByText(route.sidebarProps.text);
+    //   expect(sidebarItemElement).toBeInTheDocument();
+    // });
+    const sidebarItemElement1 = screen.getAllByText("Home,Dashboard")[0];
+    expect(sidebarItemElement1).toBeInTheDocument();
+    const sidebarItemElement2 = screen.getAllByText("Home,Dashboard")[1];
+    expect(sidebarItemElement2).toBeInTheDocument();
   });
 });

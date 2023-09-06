@@ -26,7 +26,7 @@ const Sidebar = () => {
         <Toolbar sx={{ marginBottom: "20px" }}>
           <Stack sx={{ width: "100%" }} direction="row" justifyContent="center">
             <Link to="/">
-              <Avatar src={assets.images.logo} />
+              <Avatar src={assets.images.logo} alt="Logo" />
             </Link>
           </Stack>
         </Toolbar>

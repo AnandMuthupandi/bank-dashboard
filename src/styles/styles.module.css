@@ -1,6 +1,6 @@
 .pageLoader {
-  margin: 80px 0;
-  margin-bottom: 20px;
+  margin: 80px 0 70px;
+  /* margin-bottom: 20px; */
   padding: 30px 50px;
   text-align: center;
   border-radius: 4px;
@@ -24,8 +24,6 @@
 
 .tooltipTitle {
   display: block;
-  /* margin-bottom: 0.5em; */
-  /* font-weight: bold; */
 }
 
 .container .slice {
@@ -48,6 +46,18 @@
 
 .imageContainer {
   display: flex;
-  justify-content: center; /* Horizontally center content */
-  align-items: center; /* Vertically center content */
+  justify-content: center;
+  align-items: center;
+}
+
+.clientDetailsModal {
+  position: "absolute" as "absolute";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-shadow: 24;
+  /* p: 4, */
 }

@@ -17,11 +17,6 @@
     "jsx": "react-jsx",
     "typeRoots": ["node_modules/@types", "./types"]
   },
-  "include": [
-    "src",
-    "/**/*.tsx",
-    "src/setupTests.tsx",
-    "src/tests/HomePage.test.js"
-  ],
+  "include": ["src", "/**/*.tsx", "src/setupTests.tsx"],
   "exclude": ["node_modules"]
 }

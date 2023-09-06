@@ -1,20 +1,20 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import Charts from "../../src/components/common/Charts";
+import Charts from "../components/common/Charts";
 import { useApiContext } from "../contexts/apicontext";
 
 // Mock the BarChart component
-jest.mock("../../src/components/common/BarChart", () => () => (
+jest.mock("../components/barChart/BarChart", () => () => (
   <div data-testid="mock-bar-chart">Mocked Bar Chart</div>
 ));
 
 // Mock the PieChart component
-jest.mock("../../src/components/common/PieChart", () => () => (
+jest.mock("../components/common/PieChart", () => () => (
   <div data-testid="mock-pie-chart">Mocked Pie Chart</div>
 ));
 
 // Mock the Empty Accounts component
-jest.mock("../../src/components/common/EmptyAccounts", () => () => (
+jest.mock("../components/common/EmptyAccounts", () => () => (
   <div data-testid="mock-empty-accounts">Mocked Empty Accounts</div>
 ));
 
@@ -54,7 +54,7 @@ describe("Charts Component", () => {
   });
 
   it("renders pie chart when cardTypes have data", async () => {
-    render(<Charts clientId="123" openModal={() => {}} />);
+    render(<Charts clientId="123" openModal={() => { }} />);
     await waitFor(() => {
       const pieChart = screen.getByTestId("mock-pie-chart");
       expect(pieChart).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("Charts Component", () => {
   });
 
   it("renders bar chart when cardTypes have data", async () => {
-    render(<Charts clientId="123" openModal={() => {}} />);
+    render(<Charts clientId="123" openModal={() => { }} />);
     await waitFor(() => {
       const barChart = screen.getByTestId("mock-pie-chart");
       expect(barChart).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe("Charts Component", () => {
       apiDispatch: apiDispatchMock,
     });
 
-    render(<Charts clientId="456" openModal={() => {}} />);
+    render(<Charts clientId="456" openModal={() => { }} />);
 
     // Wait for the LoadingWrapper to finish loading
     await waitFor(() => {

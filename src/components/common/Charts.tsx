@@ -5,15 +5,10 @@ import PieChart from "./PieChart";
 import { CONSTANTS } from "../../utils/constants";
 import { useApiContext } from "../../contexts/apicontext";
 import { APIUtility } from "../../utils/apiutilities";
-import { IClientAccounts } from "../../interfaces/types";
+import { ChartProps, IClientAccounts } from "../../interfaces/types";
 import EmptyAccounts from "./EmptyAccounts";
 import LoadingWrapper from "./loading/LoadingWrapper";
 import FilterCardType from "./FilterCardType";
-
-interface ChartProps {
-  clientId: string;
-  openModal: () => void;
-}
 
 export default function Charts({ clientId, openModal }: ChartProps) {
   const { apiState, fetchData, apiDispatch } = useApiContext();
@@ -32,7 +27,7 @@ export default function Charts({ clientId, openModal }: ChartProps) {
         ),
         apiId: clientAccountsAPIId,
         options: APIUtility.apiGetOptions,
-        successCallback: (resp: any) => {
+        successCallback: (resp: IClientAccounts[]) => {
           setClientAccounts(resp);
           setCardTypes(resp);
           setIsShowLoading(false);
