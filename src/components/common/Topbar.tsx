@@ -6,6 +6,7 @@ import SearchDropDown from "./SearchDropDown";
 const Topbar = () => {
   return (
     <AppBar
+      data-testid="Appbar"
       position="fixed"
       sx={{
         width: `calc(100% - ${sizeConfigs.sidebar.width})`,

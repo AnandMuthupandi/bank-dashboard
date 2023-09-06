@@ -52,11 +52,6 @@ describe('Sidebar Component', () => {
       </Router>
     );
 
-    // Check if sidebar items are rendered based on the mockAppRoutes
-    // mockAppRoutes.forEach((route) => {
-    //   const sidebarItemElement = screen.getByText(route.sidebarProps.text);
-    //   expect(sidebarItemElement).toBeInTheDocument();
-    // });
     const sidebarItemElement1 = screen.getAllByText("Home,Dashboard")[0];
     expect(sidebarItemElement1).toBeInTheDocument();
     const sidebarItemElement2 = screen.getAllByText("Home,Dashboard")[1];
