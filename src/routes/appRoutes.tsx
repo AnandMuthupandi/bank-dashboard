@@ -1,6 +1,6 @@
 import HomePage from "../pages/home/HomePage";
 import { RouteType } from "./config";
-import CustomersPageLayout from "../pages/customers/CustomersPageLayout";
+import Customers from "../pages/customers/Customers";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -23,8 +23,8 @@ const appRoutes: RouteType[] = [
   },
   {
     path: "/customers",
-    element: <CustomersPageLayout />,
-    state: "component",
+    element: <Customers />,
+    state: "customers",
     sidebarProps: {
       displayText: "Customers",
       icon: <PersonOutlineOutlinedIcon />,

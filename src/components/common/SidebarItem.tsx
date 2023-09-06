@@ -7,9 +7,10 @@ import { RouteType } from "../../routes/config";
 
 type Props = {
   item: RouteType;
+  selected: boolean;
 };
 
-const SidebarItem = ({ item }: Props) => {
+const SidebarItem = ({ item, selected }: Props) => {
   const { appState } = useSelector((state: RootState) => state.appState);
 
   return item.sidebarProps && item.path ? (
@@ -20,8 +21,7 @@ const SidebarItem = ({ item }: Props) => {
         "&: hover": {
           backgroundColor: colorConfigs.sidebar.hoverBg,
         },
-        backgroundColor:
-          appState === item.state ? colorConfigs.sidebar.activeBg : "unset",
+        backgroundColor: selected ? colorConfigs.sidebar.activeBg : "unset",
         paddingY: "12px",
         paddingX: "24px",
       }}

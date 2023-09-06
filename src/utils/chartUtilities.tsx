@@ -3,6 +3,8 @@ import { IClientAccounts } from "../interfaces/types";
 export function preprocessClientAccountData(
   data: IClientAccounts[]
 ): IClientAccounts[] {
+  console.log("data", data);
+
   const cardTypeCounts: Record<string, number> = {};
   return data.map((item) => {
     const { card_type } = item;

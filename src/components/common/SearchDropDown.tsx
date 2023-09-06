@@ -66,6 +66,9 @@ function SearchDropDown() {
           labelId="client-select-label"
           value={selectedClientName}
           onChange={handleChange}
+          inputProps={{
+            IconComponent: () => null,
+          }}
           endAdornment={
             selectedClientName && (
               <InputAdornment position="end">

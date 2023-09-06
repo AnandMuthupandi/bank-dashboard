@@ -4,9 +4,10 @@ import colorConfigs from "../../configs/colorConfigs";
 import sizeConfigs from "../../configs/sizeConfigs";
 import appRoutes from "../../routes/appRoutes";
 import SidebarItem from "./SidebarItem";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+  const location = useLocation();
   return (
     <Drawer
       variant="permanent"
@@ -31,7 +32,13 @@ const Sidebar = () => {
           </Stack>
         </Toolbar>
         {appRoutes.map((route, index) =>
-          route.sidebarProps ? <SidebarItem item={route} key={index} /> : null
+          route.sidebarProps ? (
+            <SidebarItem
+              item={route}
+              key={index}
+              selected={route.path === location.pathname}
+            />
+          ) : null
         )}
       </List>
     </Drawer>
