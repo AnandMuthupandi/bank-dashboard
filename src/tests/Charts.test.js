@@ -9,7 +9,7 @@ jest.mock("../components/barChart/BarChart", () => () => (
 ));
 
 // Mock the PieChart component
-jest.mock("../components/common/PieChart", () => () => (
+jest.mock("../components/pieChart/PieChart", () => () => (
   <div data-testid="mock-pie-chart">Mocked Pie Chart</div>
 ));
 

@@ -1,11 +1,8 @@
 import { CssBaseline } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
 import App from "./App";
 import { ApiProvider } from "./contexts/apicontext";
-import { store } from "./redux/store";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
@@ -13,14 +10,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ApiProvider>
-        <CssBaseline />
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ApiProvider>
-    </Provider>
+    <ApiProvider>
+      <CssBaseline />
+      <BrowserRouter>
+        <App data-testid="App" />
+      </BrowserRouter>
+    </ApiProvider>
   </React.StrictMode>
 );
-reportWebVitals();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import BarChart from "../barChart/BarChart";
-import PieChart from "./PieChart";
+import PieChart from "../pieChart/PieChart";
 import { CONSTANTS } from "../../utils/constants";
 import { useApiContext } from "../../contexts/apicontext";
 import { APIUtility } from "../../utils/apiutilities";
@@ -9,6 +9,7 @@ import { ChartProps, IClientAccounts } from "../../interfaces/types";
 import EmptyAccounts from "./EmptyAccounts";
 import LoadingWrapper from "./loading/LoadingWrapper";
 import FilterCardType from "./FilterCardType";
+import { preprocessClientAccountResponse } from "../../utils/chartUtilities";
 
 export default function Charts({ clientId, openModal }: ChartProps) {
   const { apiState, fetchData, apiDispatch } = useApiContext();
@@ -27,9 +28,10 @@ export default function Charts({ clientId, openModal }: ChartProps) {
         ),
         apiId: clientAccountsAPIId,
         options: APIUtility.apiGetOptions,
-        successCallback: (resp: IClientAccounts[]) => {
-          setClientAccounts(resp);
-          setCardTypes(resp);
+        successCallback: async (resp: IClientAccounts[]) => {
+          const accountDetails = await preprocessClientAccountResponse(resp);
+          setClientAccounts(accountDetails);
+          setCardTypes(accountDetails);
           setIsShowLoading(false);
           apiDispatch({
             type: CONSTANTS.ACTIONS.CLIENT_ACCOUNTS,
@@ -58,7 +60,6 @@ export default function Charts({ clientId, openModal }: ChartProps) {
 
   const filteredCardTypes = (cardType: any) => {
     const filteredItems = cardTypes.filter((card) => !cardType[card.id]);
-
     setClientAccounts(filteredItems);
   };
 
@@ -75,7 +76,6 @@ export default function Charts({ clientId, openModal }: ChartProps) {
                     width={400}
                     height={200}
                     clientAccounts={clientAccounts}
-                    cardTypes={cardTypes}
                     onSegmentClick={handlePieSegmentClick}
                   />
                 ) : (

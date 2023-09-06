@@ -7,7 +7,6 @@ import {
 } from "../../interfaces/types";
 import Bars from "./Bars";
 import styles from "../../styles/styles.module.css";
-import { preprocessClientAccountData } from "../../utils/chartUtilities";
 import { AxisBottom, AxisLeft } from "./Axis";
 
 export default function BarChart({
@@ -29,7 +28,7 @@ export default function BarChart({
 
   const highlightedAccounts =
     selectedSegment &&
-    preprocessClientAccountData(clientAccountData).filter(({ balance }) =>
+    clientAccountData.filter(({ balance }) =>
       selectedSegment === "Balance >=0" ? balance >= 0 : balance < 0
     );
 
@@ -37,9 +36,7 @@ export default function BarChart({
   const width = 350 - margin.left - margin.right;
   const height = 300 - margin.top - margin.bottom;
 
-  const maxYByCardType: Record<string, number> = preprocessClientAccountData(
-    clientAccountData
-  ).reduce(
+  const maxYByCardType: Record<string, number> = clientAccountData.reduce(
     (acc, { card_type, balance }) => {
       if (!acc[card_type] || balance > acc[card_type]) {
         acc[card_type] = balance;
@@ -51,9 +48,7 @@ export default function BarChart({
 
   if (success) {
     const scaleX = scaleBand()
-      .domain(
-        preprocessClientAccountData(cardTypes).map(({ card_type }) => card_type)
-      )
+      .domain(clientAccountData.map(({ card_type }) => card_type))
       .range([0, width])
       .padding(0.4);
 

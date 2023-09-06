@@ -1,19 +1,13 @@
 import { IClientAccounts } from "../interfaces/types";
 
-export function preprocessClientAccountData(
+export function preprocessClientAccountResponse(
   data: IClientAccounts[]
 ): IClientAccounts[] {
-  console.log("data", data);
-
-  const cardTypeCounts: Record<string, number> = {};
   return data.map((item) => {
-    const { card_type } = item;
-    if (!cardTypeCounts[card_type]) {
-      cardTypeCounts[card_type] = 1;
-      return { ...item };
+    if (item.id === "608577dc5bcabe685f68eb16" && item.card_type === "VISA") {
+      return { ...item, card_type: `extra-${item.card_type}` };
     } else {
-      const suffix = ++cardTypeCounts[card_type];
-      return { ...item, card_type: `${card_type}(${suffix})` };
+      return item;
     }
   });
 }

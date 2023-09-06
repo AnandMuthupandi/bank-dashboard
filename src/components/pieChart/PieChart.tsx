@@ -1,23 +1,11 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 import styles from "../../styles/styles.module.css";
-import { IClientAccounts } from "../../interfaces/types";
-
-type DataItem = {
-  label: string;
-  value: number;
-};
-type PieChartProps = {
-  width: number;
-  height: number;
-  clientAccounts: IClientAccounts[];
-  cardTypes: IClientAccounts[];
-  onSegmentClick: (segmentData: any) => void;
-};
+import { PieChartProps, IPieDataItem } from "../../interfaces/types";
 
 const MARGIN_X = 150;
 const MARGIN_Y = 50;
-const INFLEXION_PADDING = 20; // space between donut and label inflexion point
+const INFLEXION_PADDING = 20;
 
 const colors = [
   "#e0ac2b",
@@ -32,7 +20,6 @@ const PieChart = ({
   width,
   height,
   clientAccounts,
-  cardTypes,
   onSegmentClick,
 }: PieChartProps) => {
   const ref = useRef(null);
@@ -61,7 +48,7 @@ const PieChart = ({
     if (negativeCount > 0) {
       pieData.push({ label: "Balance <0", value: negativeCount });
     }
-    const pieGenerator = d3.pie<any, DataItem>().value((d) => d.value);
+    const pieGenerator = d3.pie<any, IPieDataItem>().value((d) => d.value);
     return pieGenerator(pieData);
   }, []);
 

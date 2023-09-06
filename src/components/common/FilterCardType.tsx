@@ -7,7 +7,6 @@ import Checkbox, { checkboxClasses } from "@mui/material/Checkbox";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import styles from "../../styles/styles.module.css";
-import { preprocessClientAccountData } from "../../utils/chartUtilities";
 
 const theme = createTheme({});
 
@@ -39,34 +38,32 @@ export default function FilterCardType({ clientAccounts, filteredCards }: any) {
                 alignItems: "center",
               }}
             >
-              {preprocessClientAccountData(clientAccounts).map(
-                (account: IClientAccounts) => (
-                  <FormControlLabel
-                    key={account.id}
-                    control={
-                      <Checkbox
-                        defaultChecked
-                        id={account.id}
-                        size="small"
-                        sx={{
-                          [`&, &.${checkboxClasses.checked}`]: {
-                            color: colorMapping(account.card_type),
-                          },
-                          fontSize: 10,
-                          padding: 0,
-                        }}
-                        onChange={() => handleCheckboxChange(account.id)}
-                      />
-                    }
-                    label={
-                      <Typography className={styles.formControlLabel}>
-                        {account.card_type}
-                      </Typography>
-                    }
-                    className={styles.formControlLabel}
-                  />
-                )
-              )}
+              {clientAccounts.map((account: IClientAccounts) => (
+                <FormControlLabel
+                  key={account.id}
+                  control={
+                    <Checkbox
+                      defaultChecked
+                      id={account.id}
+                      size="small"
+                      sx={{
+                        [`&, &.${checkboxClasses.checked}`]: {
+                          color: colorMapping(account.card_type),
+                        },
+                        fontSize: 10,
+                        padding: 0,
+                      }}
+                      onChange={() => handleCheckboxChange(account.id)}
+                    />
+                  }
+                  label={
+                    <Typography className={styles.formControlLabel}>
+                      {account.card_type}
+                    </Typography>
+                  }
+                  className={styles.formControlLabel}
+                />
+              ))}
             </FormGroup>
           </ThemeProvider>
         </>

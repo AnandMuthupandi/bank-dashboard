@@ -70,3 +70,15 @@ export interface ChartProps {
   clientId: string;
   openModal: () => void;
 }
+
+export interface PieChartProps {
+  width: number;
+  height: number;
+  clientAccounts: IClientAccounts[];
+  onSegmentClick: (segmentData: any) => void;
+}
+
+export interface IPieDataItem {
+  label: string;
+  value: number;
+}
