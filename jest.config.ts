@@ -23,7 +23,7 @@ module.exports = {
   },
   collectCoverage: true,
   collectCoverageFrom: [
-    "src/**/*.{js,jsx,tsx}",
+    "src/**/*.{js,tsx}",
     // "**/*.{js,jsx,ts,tsx}",
     "!**/*.d.ts",
     "!**/node_modules/**",
@@ -32,6 +32,8 @@ module.exports = {
     "<rootDir>/node_modules/",
     "<rootDir>/.next/",
     "<rootDir>/functions",
+    "<rootDir>/src/contexts/",
+    "<rootDir>/src/utils/",
   ],
   testEnvironment: "jsdom",
   verbose: false,

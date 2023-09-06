@@ -59,7 +59,6 @@ export default function BarChart({
 
     const minYValue = Math.min(0, Math.min(...Object.values(maxYByCardType)));
     const maxYValue = Math.max(...Object.values(maxYByCardType));
-
     const scaleY = scaleLinear()
       .domain([minYValue, maxYValue])
       .range([height, 0]);

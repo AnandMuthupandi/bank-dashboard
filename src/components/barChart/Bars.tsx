@@ -23,6 +23,7 @@ function Bars({
 
         return (
           <rect
+            data-testid="Bars"
             key={`bar-${id}`}
             x={scaleX(card_type)}
             y={scaleY(balance)}
