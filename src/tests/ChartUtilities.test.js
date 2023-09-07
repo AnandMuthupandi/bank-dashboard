@@ -1,37 +1,76 @@
-import { preprocessClientAccountsData } from '../utils/chartUtilities'
+import {
+  preprocessClientAccountsData,
+  preprocessAccountsData,
+} from "../utils/chartUtilities";
 
-const clientAccounts = [{
+const clientAccounts = [
+  {
     id: "6084118399e57e9b1e12ac45",
     card_type: "VISA",
     number: 402400,
     balance: 100,
-    created: "2021-04-24 12:39:31+00:00"
-}];
+    created: "2021-04-24 12:39:31+00:00",
+  },
+];
+const accounts = [
+  {
+    id: "6084118399e57e9b1e12ac16",
+    card_type: "Master Card",
+    number: 402400,
+    balance: 100,
+    created: "2021-04-24 12:39:31+00:00",
+  },
+];
 describe("Chart Utilities", () => {
   it("should not modify the data if the conditions are not met", () => {
-    const inputData = [
-      { id: "1", card_type: "VISA" },
-      { id: "2", card_type: "MasterCard" },
-    ];
+    const outputData = preprocessClientAccountsData(clientAccounts, accounts);
 
-    const outputData = preprocessClientAccountsData(clientAccounts);
-
-    // Ensure that the output is the same as the input when conditions are not met
-    expect(outputData).toEqual(inputData);
+    expect(outputData).toEqual(clientAccounts);
   });
 
   it("should modify the data if the conditions are met", () => {
-    const inputData = [
-      { id: "608577dc5bcabe685f68eb16", card_type: "VISA" },
-      { id: "2", card_type: "MasterCard" },
+    const mockAccounts = [
+      {
+        id: "6084118399e57e9b1e12ac45",
+        card_type: "extra-VISA",
+        number: 402400,
+        balance: 100,
+        created: "2021-04-24 12:39:31+00:00",
+      },
     ];
 
-    const outputData = preprocessClientAccountsData(inputData);
+    const outputData = preprocessClientAccountsData(clientAccounts, mockAccounts);
 
-    // Ensure that the output data is modified as expected
     expect(outputData[0].card_type).toBe("extra-VISA");
-    expect(outputData[1].card_type).toBe("MasterCard");
+    
+  });
+  it("should not modify the accounts data", () => {
+    const outputData = preprocessAccountsData(clientAccounts);
+
+    expect(outputData).toEqual(clientAccounts);
   });
 
-  // Add more test cases as needed
+  it("should modify the accounts data", () => {
+    const mockClientAccounts = [
+      {
+        id: "6084118399e57e9b1e12ac45",
+        card_type: "VISA",
+        number: 402400,
+        balance: 100,
+        created: "2021-04-24 12:39:31+00:00",
+      },
+      {
+        id: "6084118399e57e9b1e12ac16",
+        card_type: "VISA",
+        number: 402400,
+        balance: 100,
+        created: "2021-04-24 12:39:31+00:00",
+      },
+    ];
+
+    const outputData = preprocessAccountsData(mockClientAccounts);
+
+    expect(outputData[1].card_type).toBe("extra-VISA");
+    
+  });
 });

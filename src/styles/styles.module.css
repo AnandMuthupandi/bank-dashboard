@@ -59,5 +59,12 @@
   background-color: #fff;
   border: 2px solid #000;
   box-shadow: 24;
-  /* p: 4, */
+}
+
+.imageLayout {
+  width: 400;
+  height: 200;
+  flex-direction: "row";
+  justify-content: "center";
+  align-items: "center";
 }

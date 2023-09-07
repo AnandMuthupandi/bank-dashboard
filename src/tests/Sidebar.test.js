@@ -3,12 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Sidebar from '../components/common/Sidebar';
 
-const mockAssets = {
-  images: {
-    logo: "../assets/images/bank-logo.png",
-    zeroAccount: "../assets/images/bank-logo.png"
-  },
-};
 // Mock the appRoutes that you expect to be used in your Sidebar
 const mockAppRoutes = [
   { path: '/', sidebarProps: { text: 'Home,Dashboard' } },

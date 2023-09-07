@@ -1,33 +1,17 @@
-import React, { useEffect } from "react";
-import { useApiContext } from "../../contexts/apicontext";
-import { APIUtility } from "../../utils/apiutilities";
-import { CONSTANTS } from "../../utils/constants";
-import ClientDetails from "../clientDetails/ClientDetails";
+import React from "react";
+import assets from "../../assets";
+import styles from "../../styles/styles.module.css";
 
-const Customers: React.FC = () => {
-  const { apiState, fetchData } = useApiContext();
-  const clientsAPIId = CONSTANTS.API.CLIENTS.ID;
-
-  useEffect(() => {
-    if (!apiState[clientsAPIId]) {
-      fetchData({
-        url: APIUtility.generateApiUrl(CONSTANTS.API.CLIENTS.URL),
-        apiId: clientsAPIId,
-        options: APIUtility.apiGetOptions,
-
-        isToStoreInContext: true,
-      });
-    }
-  }, []);
-
-  if (apiState[clientsAPIId]) {
-    let { data, error } = APIUtility.parseResponse(apiState[clientsAPIId]);
-    if (data) {
-      return <ClientDetails clientData={data} />;
-    } else if (error) {
-      return error.message;
-    }
-  }
+export const Customers = () => {
+  return (
+    <div className={styles.imageContainer}>
+      <img
+        src={assets.images.underConstruction}
+        className={styles.imageLayout}
+        alt="inprogress"
+      />
+    </div>
+  );
 };
 
 export default Customers;
